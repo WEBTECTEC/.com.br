@@ -114,7 +114,13 @@
             position: sticky;
             top: 0;
             z-index: 50;
-            border-bottom: 3px solid #FFCA28;
+            /* Gradiente dourado */
+            border-bottom: 3px solid transparent;
+            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+            background-image: linear-gradient(var(--header-bg), var(--header-bg)), 
+                              linear-gradient(90deg, #CFB53B, #DAA520, #CFB53B);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
         }
 
         .header-container {
