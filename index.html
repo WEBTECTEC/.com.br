@@ -32,7 +32,7 @@
             --gray: #475569;
             --light: #f1f5f9;
             --white: #ffffff;
-            --header-bg: #e8eaed;  /* Nova cor do cabeçalho - cinza claro suave */
+            --header-bg: #d8dde3;  /* Cinza mais escuro para melhor contraste com transparência */
             --bege-claro: #f8f5f0;  /* Opção de bege claro disponível */
             --shadow-sm: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
             --shadow-md: 0 20px 30px -10px rgba(90, 69, 255, 0.15);
@@ -106,17 +106,18 @@
             margin-right: 0.3rem;
         }
 
-        /* Header */.header {
-            background: rgba(216, 221, 227, 0.7);  /* Cinza com 70% opacidade */
+        /* Header - CORRIGIDO COM TRANSPARÊNCIA */
+        .header {
+            background: rgba(216, 221, 227, 0.75);  /* #d8dde3 com 75% de opacidade */
             backdrop-filter: blur(8px);  /* Desfoque suave do conteúdo atrás */
             -webkit-backdrop-filter: blur(8px);  /* Suporte para Safari */
             box-shadow: var(--shadow-sm);
             position: sticky;
             top: 0;
             z-index: 50;
-            /* Gradiente dourado */
+            /* Gradiente dourado na borda - MANTIDO */
             border-bottom: 3px solid transparent;
-            background-image: linear-gradient(var(--header-bg), var(--header-bg)), 
+            background-image: linear-gradient(rgba(216, 221, 227, 0.75), rgba(216, 221, 227, 0.75)), 
                               linear-gradient(90deg, #CFB53B, #DAA520, #CFB53B);
             background-origin: border-box;
             background-clip: padding-box, border-box;
@@ -174,7 +175,7 @@
             display: flex;
             align-items: center;
             gap: 0.8rem;
-            background: rgba(90,69,255,0.05);
+            background: rgba(90,69,255,0.08);
             padding: 0.5rem 1.2rem;
             border-radius: 100px;
             border: 1px solid rgba(90,69,255,0.2);
@@ -182,7 +183,7 @@
         }
 
         .qrcode-header:hover {
-            background: rgba(90,69,255,0.1);
+            background: rgba(90,69,255,0.15);
             transform: scale(1.02);
             box-shadow: var(--shadow-sm);
         }
@@ -390,7 +391,7 @@
             font-weight: 300;
         }
 
-        /* Serviços - ATUALIZADO COM CLASSIFICAÇÕES */
+        /* Serviços */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1037,9 +1038,10 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: white;
+                background: rgba(216, 221, 227, 0.95);
                 padding: 2rem;
                 box-shadow: var(--shadow-md);
+                backdrop-filter: blur(8px);
             }
 
             .nav-menu.active ul {
