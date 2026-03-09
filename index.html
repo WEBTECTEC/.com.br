@@ -107,18 +107,16 @@
         }
 
         /* Header - CORRIGIDO COM A NOVA COR #d1d5db */
-        /* Header - VERSÃO DE TESTE */
+        /* Header - COM TRANSPARÊNCIA E DESFOQUE (Efeito Vidro) */
         .header {
-            background: #d1d5db !important;  /* Cor sólida sem transparência */
-            backdrop-filter: none !important;  /* Remove o desfoque */
-            -webkit-backdrop-filter: none !important;
+            background-color: rgba(209, 213, 219, 0.7);  /* #d1d5db com 70% opacidade */
+            backdrop-filter: blur(8px);  /* Desfoque do conteúdo atrás */
+            -webkit-backdrop-filter: blur(8px);  /* Suporte Safari */
             box-shadow: var(--shadow-sm);
             position: sticky;
             top: 0;
             z-index: 50;
-            border-bottom: 3px solid #CFB53B;  /* Borda dourada sólida */
-            /* Remove o gradiente complexo */
-            background-image: none;
+            border-bottom: 3px solid #CFB53B;  /* Borda dourada */
         }
 
         .header-container {
