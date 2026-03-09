@@ -32,8 +32,8 @@
             --gray: #475569;
             --light: #f1f5f9;
             --white: #ffffff;
-            --header-bg: #d1d5db;  /* Cinza mais escuro para melhor contraste com transparência */
-            --bege-claro: #f8f5f0;  /* Opção de bege claro disponível */
+            --header-bg: #d1d5db;
+            --bege-claro: #f8f5f0;
             --shadow-sm: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
             --shadow-md: 0 20px 30px -10px rgba(90, 69, 255, 0.15);
             --border-radius: 1.5rem;
@@ -90,6 +90,11 @@
             margin-bottom: 1rem;
             text-transform: uppercase;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .classification-badge:hover {
+            transform: translateY(-2px);
         }
 
         .badge-locacao {
@@ -106,17 +111,16 @@
             margin-right: 0.3rem;
         }
 
-        /* Header - CORRIGIDO COM A NOVA COR #d1d5db */
-        /* Header - COM TRANSPARÊNCIA E DESFOQUE (Efeito Vidro) */
+        /* Header com efeito vidro */
         .header {
-            background-color: rgba(209, 213, 219, 0.7);  /* #d1d5db com 70% opacidade */
-            backdrop-filter: blur(8px);  /* Desfoque do conteúdo atrás */
-            -webkit-backdrop-filter: blur(8px);  /* Suporte Safari */
+            background-color: rgba(209, 213, 219, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             box-shadow: var(--shadow-sm);
             position: sticky;
             top: 0;
             z-index: 50;
-            border-bottom: 3px solid #CFB53B;  /* Borda dourada */
+            border-bottom: 3px solid #CFB53B;
         }
 
         .header-container {
@@ -134,7 +138,6 @@
             gap: 1.5rem;
         }
 
-        /* LOGO DA EMPRESA */
         .logo-image {
             width: 192px;
             height: auto;
@@ -166,7 +169,6 @@
             color: var(--gray);
         }
 
-        /* QR CODE NO HEADER */
         .qrcode-header {
             display: flex;
             align-items: center;
@@ -237,7 +239,6 @@
             cursor: pointer;
         }
 
-        /* Hero */
         .hero {
             padding: 4rem 2rem 5rem;
             background: radial-gradient(circle at 80% 30%, rgba(90,69,255,0.05) 0%, transparent 50%);
@@ -325,7 +326,7 @@
             color: white;
         }
 
-        /* Container de tecnologias com cores personalizadas */
+        /* Container de tecnologias */
         .tech-container {
             background: rgba(255,255,255,0.2);
             backdrop-filter: blur(4px);
@@ -343,19 +344,51 @@
             font-size: 0.95rem;
         }
 
-        .tech-item.postgresql {
-            color: #000000;
-            background: rgba(255,255,255,0.9);
+        /* Estilos específicos para badges de tecnologia */
+        .postgresql-container {
+            background: white;
             padding: 0.2rem 0.8rem;
             border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            border: 1px solid #e0e0e0;
+            transition: transform 0.2s;
+        }
+
+        .postgresql-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .postgresql-container img {
+            height: 1.4rem;
+            vertical-align: middle;
+        }
+
+        .postgresql-container span {
+            color: black;
+            font-weight: 700;
         }
 
         .tech-item.hospedagem {
             color: #000000;
-            background: #c7c7c7;
+            background: white;
             padding: 0.2rem 0.8rem;
             border-radius: 30px;
             font-weight: 700;
+            border: 1px solid #e0e0e0;
+            transition: transform 0.2s;
+        }
+
+        .tech-item.hospedagem:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .tech-item.hospedagem i {
+            color: #000000;
+            margin-right: 0.3rem;
         }
 
         .tech-item.html {
@@ -364,6 +397,12 @@
             padding: 0.2rem 0.8rem;
             border-radius: 30px;
             font-weight: 700;
+            transition: transform 0.2s;
+        }
+
+        .tech-item.html:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         .tech-item.css {
@@ -372,6 +411,12 @@
             padding: 0.2rem 0.8rem;
             border-radius: 30px;
             font-weight: 700;
+            transition: transform 0.2s;
+        }
+
+        .tech-item.css:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         .tech-item.js {
@@ -380,6 +425,12 @@
             padding: 0.2rem 0.8rem;
             border-radius: 30px;
             font-weight: 700;
+            transition: transform 0.2s;
+        }
+
+        .tech-item.js:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .tech-divider {
@@ -439,6 +490,12 @@
             font-size: 2rem;
             color: var(--primary);
             margin-bottom: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+            color: var(--primary-dark);
         }
 
         .service-card h3 {
@@ -478,6 +535,12 @@
             border-radius: 30px;
             display: inline-block;
             font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+
+        .service-card:hover .price-tag {
+            transform: scale(1.05);
+            background: rgba(0,201,183,0.15);
         }
 
         /* Portfólio */
@@ -499,6 +562,7 @@
 
         .portfolio-card:hover {
             box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
         }
 
         .portfolio-header {
@@ -528,6 +592,65 @@
             font-size: 0.9rem;
             font-weight: 600;
             box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .stat-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+        }
+
+        /* Cores dos ícones nos badges */
+        .stat-badge i {
+            margin-right: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .stat-badge i.fa-house-chimney-dollar {
+            color: #2ecc71;
+        }
+
+        .stat-badge i.fa-key {
+            color: #f39c12;
+        }
+
+        .stat-badge i.fa-building {
+            color: #3498db;
+        }
+
+        .stat-badge i.fa-image {
+            color: #9b59b6;
+        }
+
+        .stat-badge i.fa-video {
+            color: #e74c3c;
+        }
+
+        .stat-badge i.fa-gear {
+            color: #34495e;
+        }
+
+        .stat-badge i.fa-window-maximize {
+            color: #2c3e50;
+        }
+
+        .stat-badge i.fa-qrcode {
+            color: #e67e22;
+        }
+
+        .stat-badge i.fa-universal-access {
+            color: #16a085;
+        }
+
+        .stat-badge i.fa-clock {
+            color: #95a5a6;
+        }
+
+        .stat-badge i.fa-rocket {
+            color: #e74c3c;
         }
 
         .portfolio-tech {
@@ -545,11 +668,19 @@
             font-size: 0.85rem;
             font-weight: 500;
             border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+        }
+
+        .tech-tag:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
         }
 
         .portfolio-footer {
             padding: 1.5rem;
             border-top: 1px solid #e2e8f0;
+            font-size: 0.95rem;
         }
 
         /* Diferenciais */
@@ -570,6 +701,11 @@
 
         .diff-item {
             text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .diff-item:hover {
+            transform: translateY(-8px);
         }
 
         .diff-item i {
@@ -583,6 +719,12 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .diff-item:hover i {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1);
         }
 
         /* Formulário */
@@ -646,13 +788,14 @@
             font-weight: 700;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s;
             width: 100%;
         }
 
         .submit-btn:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(90,69,255,0.3);
         }
 
         .submit-btn:disabled {
@@ -689,7 +832,6 @@
             color: var(--primary);
         }
 
-        /* ESTILO PARA TELEFONE/WHATSAPP COMPACT */
         .phone-whatsapp-compact {
             display: flex;
             align-items: center;
@@ -770,10 +912,15 @@
             color: var(--primary);
             font-size: 2rem;
             margin-right: 1rem;
-            transition: 0.2s;
+            transition: all 0.2s;
+            display: inline-block;
         }
 
-        /* QR CODE NO FOOTER */
+        .social-links a:hover {
+            transform: scale(1.1);
+            color: var(--primary-dark);
+        }
+
         .qrcode-footer {
             display: flex;
             flex-direction: column;
@@ -873,7 +1020,7 @@
             font-size: 0.9rem;
         }
 
-        /* ===== MEDIA QUERIES PARA MOBILE ===== */
+        /* Media Queries */
         @media (max-width: 768px) {
             .container {
                 padding: 0 1.5rem;
@@ -1124,12 +1271,12 @@
                 </div>
                 <div class="hero-visual" style="background: linear-gradient(145deg, var(--primary), #8875ff); border-radius: 40px; padding: 2.5rem; color: white; position: relative; overflow: hidden;">
                     <div class="tech-container">
-                        <span style="background: white; padding: 0.2rem 0.8rem; border-radius: 30px; display: inline-flex; align-items: center; gap: 0.3rem;">
-                            <img src="https://img.shields.io/badge/-FFFFFF?style=flat&logo=postgresql&logoColor=black" alt="" style="height: 1.4rem;">
-                            <span style="color: black; font-weight: 700;">PostgreSQL</span>
+                        <span class="postgresql-container">
+                            <img src="https://img.shields.io/badge/PostgreSQL-FFCA28?style=flat&logo=postgresql&logoColor=black" alt="PostgreSQL" style="height: 1.4rem; vertical-align: middle;">
+                            <span>PostgreSQL</span>
                         </span>
                         <span class="tech-divider">·</span>
-                        <span class="tech-item hospedagem"><i class="fa-solid fa-database"></i> hospedagem de produção</span>
+                        <span class="tech-item hospedagem"><i class="fa-solid fa-server"></i> hospedagem de produção</span>
                         <span class="tech-divider">·</span>
                         <span class="tech-item html"><i class="fa-brands fa-html5"></i> HTML5</span>
                         <span class="tech-divider">·</span>
@@ -1184,8 +1331,8 @@
 
                 <!-- LOCAÇÃO: Manutenção mensal -->
                 <div class="service-card">
-                    <span class="classification-badge badge-locacao"><i class="fa-regular fa-calendar"></i> LOCAÇÃO</span>
-                    <div class="service-icon"><i class="fa-solid fa-rotate"></i></div>
+                    <span class="classification-badge badge-locacao"><i class="fa-solid fa-key"></i> LOCAÇÃO</span>
+                    <div class="service-icon"><i class="fa-solid fa-gears"></i></div>
                     <h3>Manutenção mensal</h3>
                     <div class="service-description">
                         Suporte contínuo, atualizações de segurança e melhorias evolutivas.
@@ -1201,8 +1348,8 @@
 
                 <!-- AQUISIÇÃO: Sistemas modulares -->
                 <div class="service-card">
-                    <span class="classification-badge badge-aquisicao"><i class="fa-solid fa-tag"></i> AQUISIÇÃO</span>
-                    <div class="service-icon"><i class="fa-solid fa-diagram-project"></i></div>
+                    <span class="classification-badge badge-aquisicao"><i class="fa-solid fa-cart-shopping"></i> AQUISIÇÃO</span>
+                    <div class="service-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
                     <h3>Sistemas modulares</h3>
                     <div class="service-description">
                         Funcionalidades sob medida: painéis admin, módulo de estoque, módulo de E-commerce, módulos de gestão, integrações.
@@ -1225,6 +1372,7 @@
             <p class="section-sub" id="portfolioSub">Conheça alguns dos nossos trabalhos:</p>
 
             <div class="portfolio-grid" id="portfolioGrid">
+                <!-- Imóveis Maceió -->
                 <div class="portfolio-card">
                     <div class="portfolio-header">
                         <h3>Imóveis Maceió</h3>
@@ -1256,6 +1404,7 @@
                     </div>
                 </div>
 
+                <!-- Portal Piaçabuçu -->
                 <div class="portfolio-card">
                     <div class="portfolio-header" style="background: linear-gradient(135deg, #005CA9, #00A859);">
                         <h3>Portal Piaçabuçu</h3>
@@ -1279,6 +1428,7 @@
                     </div>
                 </div>
 
+                <!-- Em breve -->
                 <div class="portfolio-card">
                     <div class="portfolio-header" style="background: linear-gradient(135deg, #FF6B6B, #4ECDC4);">
                         <h3>Em breve</h3>
