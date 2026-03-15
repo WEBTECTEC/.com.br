@@ -11,7 +11,13 @@
     
     <title>WEB TEC-TEC · Soluções Digitais Inteligentes</title>
     
-    <!-- FONT AWESOME COMPLETO - Garante que todos os ícones funcionem -->
+    <!-- Pré-conexão com CDNs para acelerar carregamento -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    
+    <!-- Font Awesome completo -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Supabase com defer para não bloquear renderização -->
@@ -36,9 +42,10 @@
             --primary: #5a45ff;
             --primary-dark: #3b2bb3;
             --secondary: #00c9b7;
+            --secondary-dark: #006b60; /* Tom mais escuro para contraste */
             --accent: #ff8a5c;
             --dark: #0f172a;
-            --gray: #2d3748; /* Aumentado contraste */
+            --gray: #2d3748;
             --light: #f1f5f9;
             --white: #ffffff;
             --header-bg: #d1d5db;
@@ -62,7 +69,7 @@
             padding: 0 2rem;
         }
 
-        h1, h2, h3 {
+        h1, h2, h3, h4, h5, h6 {
             font-weight: 700;
             letter-spacing: -0.02em;
         }
@@ -166,7 +173,7 @@
         .logo-text h1 {
             font-size: 1.8rem;
             line-height: 1.2;
-            color: #0f172a; /* Cor mais escura para melhor contraste */
+            color: #0f172a;
         }
 
         .logo-text .tech {
@@ -176,7 +183,7 @@
 
         .logo-text .small {
             font-size: 0.75rem;
-            color: #2d3748; /* Cor mais escura */
+            color: #2d3748;
         }
 
         .qrcode-header {
@@ -208,11 +215,11 @@
         .qrcode-header span {
             font-size: 0.9rem;
             font-weight: 600;
-            color: #1e293b; /* Cor mais escura para melhor contraste */
+            color: #1e293b;
         }
 
         .qrcode-header small {
-            color: #2d3748; /* Cor mais escura */
+            color: #2d3748;
             font-size: 0.7rem;
         }
 
@@ -225,7 +232,7 @@
         .nav-menu a {
             text-decoration: none;
             font-weight: 600;
-            color: #0f172a; /* Cor mais escura */
+            color: #0f172a;
             transition: color 0.2s;
             display: flex;
             align-items: center;
@@ -517,7 +524,7 @@
         }
 
         .service-description {
-            color: #2d3748; /* Cor mais escura */
+            color: #2d3748;
             margin-bottom: 1rem;
             line-height: 1.6;
         }
@@ -525,7 +532,7 @@
         .service-features {
             margin: 1rem 0;
             padding-left: 1.2rem;
-            color: #1e293b; /* Cor mais escura */
+            color: #1e293b;
             font-size: 0.95rem;
         }
 
@@ -534,7 +541,7 @@
         }
 
         .service-features i {
-            color: var(--secondary);
+            color: var(--secondary-dark);
             margin-right: 0.5rem;
             font-size: 0.8rem;
         }
@@ -542,7 +549,7 @@
         .price-tag {
             margin-top: 1.5rem;
             font-weight: 700;
-            color: var(--secondary);
+            color: var(--secondary-dark);
             background: rgba(0,201,183,0.1);
             padding: 0.4rem 1rem;
             border-radius: 30px;
@@ -571,6 +578,7 @@
             font-size: 1.5rem;
             font-weight: 500;
             margin-bottom: 1rem;
+            color: white;
         }
 
         .slogan-banner p:first-child {
@@ -638,7 +646,7 @@
             margin-top: 1rem;
         }
 
-        .step-item h4 {
+        .step-item h3 {
             font-size: 1.3rem;
             margin-bottom: 1rem;
             color: #0f172a;
@@ -733,7 +741,7 @@
         }
 
         .plan-features li i {
-            color: var(--secondary);
+            color: var(--secondary-dark);
             width: 20px;
             text-align: center;
         }
@@ -1130,7 +1138,7 @@
         }
 
         .phones i {
-            color: var(--secondary);
+            color: var(--secondary-dark);
             width: 24px;
         }
 
@@ -1492,7 +1500,6 @@
     <header class="header">
         <div class="header-container">
             <div class="logo-area">
-                <!-- Dimensões explícitas adicionadas -->
                 <img src="wtlogo.jpg" alt="WEB TEC-TEC Logo" width="192" height="192" class="logo-image">
                 <div class="logo-text">
                     <h1>WEB <span class="tech">TEC-TEC</span></h1>
@@ -1504,7 +1511,6 @@
 
             <a href="https://webtectec.github.io/.com.br/" target="_blank" style="text-decoration: none;">
                 <div class="qrcode-header">
-                    <!-- Dimensões explícitas adicionadas -->
                     <img src="qr-code.png" alt="QR Code WEB TEC-TEC" width="76" height="76">
                     <div class="text">
                         <span><i class="fa-regular fa-qrcode"></i> Acesso rápido</span><br>
@@ -1542,8 +1548,7 @@
                 <div class="hero-visual" style="background: linear-gradient(145deg, var(--primary), #8875ff); border-radius: 40px; padding: 2.5rem; color: white; position: relative; overflow: hidden;">
                     <div class="tech-container">
                         <span class="postgresql-container">
-                            <!-- Dimensões explícitas adicionadas -->
-                            <img src="https://img.shields.io/badge/-FFFFFF?style=flat&logo=postgresql&logoColor=black" alt="" width="auto" height="22" style="height: 1.4rem;">
+                            <img src="https://img.shields.io/badge/-FFFFFF?style=flat&logo=postgresql&logoColor=black" alt="PostgreSQL" width="auto" height="22" style="height: 1.4rem;">
                             <span style="color: black; font-weight: 700;">PostgreSQL</span>
                         </span>
                         <span class="tech-divider">·</span>
@@ -1650,25 +1655,25 @@
                     <div class="step-item">
                         <div class="step-number">1</div>
                         <div class="step-icon"><i class="fa-regular fa-file-signature"></i></div>
-                        <h4>Selecione o Plano</h4>
+                        <h3>Selecione o Plano</h3>
                         <p>Analise e escolha a opção que melhor se adapta às necessidades do seu empreendimento.</p>
                     </div>
                     <div class="step-item">
                         <div class="step-number">2</div>
                         <div class="step-icon"><i class="fa-regular fa-id-card"></i></div>
-                        <h4>Cadastre-se</h4>
+                        <h3>Cadastre-se</h3>
                         <p>Preencha seus dados básicos e crie seu acesso para começar.</p>
                     </div>
                     <div class="step-item">
                         <div class="step-number">3</div>
                         <div class="step-icon"><i class="fa-regular fa-clock"></i></div>
-                        <h4>Forneça o Conteúdo</h4>
+                        <h3>Forneça o Conteúdo</h3>
                         <p>Envie as informações, textos, horários e imagens da sua empresa.</p>
                     </div>
                     <div class="step-item">
                         <div class="step-number">4</div>
                         <div class="step-icon"><i class="fa-regular fa-circle-check"></i></div>
-                        <h4>Projeto Finalizado</h4>
+                        <h3>Projeto Finalizado</h3>
                         <p>Seu site estará no ar, pronto para receber visitas e divulgar seu negócio.</p>
                     </div>
                 </div>
@@ -1860,7 +1865,7 @@
                         <span class="tech-tag">hospedagem de produção</span>
                     </div>
                     <div class="portfolio-footer">
-                        <span><i class="fa-regular fa-circle-check" style="color: var(--secondary);"></i> Site completo para imobiliária com sistema de gestão de imóveis, controle de vendas e aluguéis, galerias de fotos e vídeos integradas.</span>
+                        <span><i class="fa-regular fa-circle-check" style="color: var(--secondary-dark);"></i> Site completo para imobiliária com sistema de gestão de imóveis, controle de vendas e aluguéis, galerias de fotos e vídeos integradas.</span>
                     </div>
                 </div>
 
@@ -1889,7 +1894,7 @@
                         <span class="tech-tag">hospedagem de produção</span>
                     </div>
                     <div class="portfolio-footer">
-                        <span><i class="fa-regular fa-circle-check" style="color: var(--secondary);"></i> Portal institucional com notícias dinâmicas, sistema de transparência pública e recursos de acessibilidade.</span>
+                        <span><i class="fa-regular fa-circle-check" style="color: var(--secondary-dark);"></i> Portal institucional com notícias dinâmicas, sistema de transparência pública e recursos de acessibilidade.</span>
                     </div>
                 </div>
 
@@ -1918,7 +1923,7 @@
                         <span class="tech-tag">hospedagem de produção</span>
                     </div>
                     <div class="portfolio-footer">
-                        <span><i class="fa-regular fa-circle-check" style="color: var(--secondary);"></i> Pronto para transformar sua ideia em realidade com tecnologia de ponta e soluções personalizadas.</span>
+                        <span><i class="fa-regular fa-circle-check" style="color: var(--secondary-dark);"></i> Pronto para transformar sua ideia em realidade com tecnologia de ponta e soluções personalizadas.</span>
                     </div>
                 </div>
             </div>
