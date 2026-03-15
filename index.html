@@ -542,6 +542,246 @@
             background: rgba(0,201,183,0.15);
         }
 
+        /* ===== NOVA SEÇÃO: PLANOS DETALHADOS E PASSO A PASSO ===== */
+        .slogan-banner {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius);
+            margin: 3rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .slogan-banner p {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .slogan-banner p:first-child {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .slogan-banner i {
+            margin-right: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .slogan-banner .highlight {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .steps-section {
+            margin: 4rem 0;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .step-item {
+            background: var(--white);
+            padding: 2rem 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .step-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--secondary);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--secondary);
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            box-shadow: 0 4px 8px rgba(0,201,183,0.3);
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .step-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .step-item p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .plans-showcase {
+            background: var(--light);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            margin: 3rem 0;
+        }
+
+        .plans-showcase h3 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .plans-showcase h3 i {
+            color: var(--secondary);
+            margin-right: 0.5rem;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .plan-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+
+        .plan-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.8rem 1.5rem;
+            text-align: center;
+        }
+
+        .plan-header h4 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-price {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .plan-price small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .plan-features {
+            padding: 2rem 1.5rem;
+            flex-grow: 1;
+        }
+
+        .plan-features ul {
+            list-style: none;
+        }
+
+        .plan-features li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray);
+        }
+
+        .plan-features li i {
+            color: var(--secondary);
+            width: 20px;
+            text-align: center;
+        }
+
+        .plan-card .btn-outline {
+            margin: 0 1.5rem 1.5rem 1.5rem;
+            text-align: center;
+            display: block;
+        }
+
+        .visit-tracker {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 3rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            border: 2px dashed var(--secondary);
+        }
+
+        .tracker-info {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tracker-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            background: rgba(90,69,255,0.1);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tracker-text h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tracker-text p {
+            color: var(--gray);
+        }
+
+        .tracker-badge {
+            background: linear-gradient(135deg, var(--secondary), #00b09b);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .tracker-badge i {
+            margin-right: 0.5rem;
+        }
+        /* ===== FIM DA NOVA SEÇÃO ===== */
+
         /* Portfólio - ESTILOS PARA OS PROJETOS */
         .portfolio-grid {
             display: grid;
@@ -617,23 +857,23 @@
         .stat-badge i.fa-gear { color: #34495e; }
 
         /* Portal Piaçabuçu */
-        .stat-badge i.fa-landmark { color: #8e44ad; } /* Órgão público */
-        .stat-badge i.fa-newspaper { color: #e67e22; } /* Notícias */
-        .stat-badge i.fa-mobile-screen-button { color: #16a085; } /* Acessibilidade mobile */
-        .stat-badge i.fa-qrcode { color: #2980b9; } /* QR code */
-        .stat-badge i.fa-universal-access { color: #27ae60; } /* Acessibilidade */
-        .stat-badge i.fa-scale-balanced { color: #7f8c8d; } /* Transparência */
-        .stat-badge i.fa-calendar-check { color: #d35400; } /* Eventos/notícias */
-        .stat-badge i.fa-bullhorn { color: #c0392b; } /* Comunicação pública */
+        .stat-badge i.fa-landmark { color: #8e44ad; }
+        .stat-badge i.fa-newspaper { color: #e67e22; }
+        .stat-badge i.fa-mobile-screen-button { color: #16a085; }
+        .stat-badge i.fa-qrcode { color: #2980b9; }
+        .stat-badge i.fa-universal-access { color: #27ae60; }
+        .stat-badge i.fa-scale-balanced { color: #7f8c8d; }
+        .stat-badge i.fa-calendar-check { color: #d35400; }
+        .stat-badge i.fa-bullhorn { color: #c0392b; }
 
         /* Em breve */
         .stat-badge i.fa-clock { color: #95a5a6; }
         .stat-badge i.fa-rocket { color: #e74c3c; }
-        .stat-badge i.fa-lightbulb { color: #f1c40f; } /* Ideia/novo projeto */
-        .stat-badge i.fa-pen-ruler { color: #3498db; } /* Em desenvolvimento */
-        .stat-badge i.fa-code { color: #2c3e50; } /* Programação */
-        .stat-badge i.fa-paint-brush { color: #9b59b6; } /* Design */
-        .stat-badge i.fa-chart-line { color: #27ae60; } /* Crescimento/evolução */
+        .stat-badge i.fa-lightbulb { color: #f1c40f; }
+        .stat-badge i.fa-pen-ruler { color: #3498db; }
+        .stat-badge i.fa-code { color: #2c3e50; }
+        .stat-badge i.fa-paint-brush { color: #9b59b6; }
+        .stat-badge i.fa-chart-line { color: #27ae60; }
 
         .portfolio-tech {
             padding: 1.5rem;
@@ -1081,6 +1321,43 @@
                 gap: 1.5rem;
             }
 
+            /* Responsividade da nova seção */
+            .steps-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .step-number {
+                position: static;
+                display: inline-block;
+                margin-bottom: 1rem;
+            }
+
+            .plans-showcase {
+                padding: 2rem 1.5rem;
+            }
+
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .visit-tracker {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .tracker-info {
+                justify-content: center;
+            }
+
+            .slogan-banner p:first-child {
+                font-size: 1.5rem;
+            }
+
+            .slogan-banner p {
+                font-size: 1.2rem;
+            }
+
             .portfolio-grid {
                 grid-template-columns: 1fr;
             }
@@ -1348,6 +1625,207 @@
                 </div>
             </div>
         </section>
+
+        <!-- ===== NOVA SEÇÃO: SLOGAN, PASSO A PASSO E PLANOS ===== -->
+        <div class="container">
+            <!-- Banner de Slogans -->
+            <div class="slogan-banner">
+                <p><i class="fa-regular fa-lightbulb"></i> criando soluções inteligentes para ajudar pequenas, médias e grandes empresas e negócios.</p>
+                <p>Chegou a hora da sua marca <span class="highlight">entrar no mundo digital</span>.</p>
+            </div>
+
+            <!-- Seção Passo a Passo (4 Passos) -->
+            <div class="steps-section">
+                <h2 class="section-title">Como <span>Funciona</span>?</h2>
+                <p class="section-sub">4 passos simples para colocar seu negócio online</p>
+
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-icon"><i class="fa-regular fa-file-signature"></i></div>
+                        <h4>Selecione o Plano</h4>
+                        <p>Analise e escolha a opção que melhor se adapta às necessidades do seu empreendimento.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-icon"><i class="fa-regular fa-id-card"></i></div>
+                        <h4>Cadastre-se</h4>
+                        <p>Preencha seus dados básicos e crie seu acesso para começar.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-icon"><i class="fa-regular fa-clock"></i></div>
+                        <h4>Forneça o Conteúdo</h4>
+                        <p>Envie as informações, textos, horários e imagens da sua empresa.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-icon"><i class="fa-regular fa-circle-check"></i></div>
+                        <h4>Projeto Finalizado</h4>
+                        <p>Seu site estará no ar, pronto para receber visitas e divulgar seu negócio.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vitrine de Planos Detalhados -->
+            <div class="plans-showcase">
+                <h3><i class="fa-regular fa-star"></i> Temos Planos Incríveis para seu Negócio</h3>
+                <div class="plans-grid">
+                    <!-- Plano 1: Light -->
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <h4>Light</h4>
+                            <div class="plan-price">R$ 162,10 <small>/mensais</small></div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li><i class="fa-regular fa-circle-check"></i> Adicionar Seu Domínio</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Servidor de E-mail (1 conta)</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Slide com Destaques</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Seção "Sobre a Empresa"</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Horário de Funcionamento</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Galeria de Fotos</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Cases de Clientes</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Cupons de Desconto</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Catálogo de Produtos</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Seção de Vídeos</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Painel de Notícias</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Blocos de Serviços</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Abas de Serviços</li>
+                                <li><i class="fa-regular fa-circle-check"></i> FAQ (Perguntas Frequentes)</li>
+                            </ul>
+                        </div>
+                        <a href="#contato" class="btn-outline"><i class="fa-regular fa-circle-check"></i> Contratar</a>
+                    </div>
+
+                    <!-- Plano 2: Econômico -->
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <h4>Econômico</h4>
+                            <div class="plan-price">R$ 243,15 <small>/mensais</small></div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li><i class="fa-regular fa-circle-check"></i> Adicionar Seu Domínio</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Servidor de E-mail (5 contas)</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Slide com Destaques</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Seção "Sobre a Empresa"</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Horário de Funcionamento</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Galeria de Fotos</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Cases de Clientes</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Cupons de Desconto</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Catálogo de Produtos</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Seção de Vídeos</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Painel de Notícias</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Blocos de Serviços</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Abas de Serviços</li>
+                                <li><i class="fa-regular fa-circle-check"></i> FAQ (Perguntas Frequentes)</li>
+                            </ul>
+                        </div>
+                        <a href="#contato" class="btn-outline"><i class="fa-regular fa-circle-check"></i> Contratar</a>
+                    </div>
+
+                    <!-- Plano 3: Comercial/Institucional -->
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <h4>Comercial</h4>
+                            <div class="plan-price">R$ 324,20 <small>/mensais</small></div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li><i class="fa-regular fa-circle-check"></i> Adicionar Seu Domínio</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Servidor de E-mail (10 contas)</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Slide com Destaques</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Seção "Sobre a Empresa"</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Horário de Funcionamento</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Galeria de Fotos</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Cases de Clientes</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Cupons de Desconto</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Catálogo de Produtos</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Seção de Vídeos</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Painel de Notícias</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Blocos de Serviços</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Abas de Serviços</li>
+                                <li><i class="fa-regular fa-circle-check"></i> FAQ (Perguntas Frequentes)</li>
+                            </ul>
+                        </div>
+                        <a href="#contato" class="btn-outline"><i class="fa-regular fa-circle-check"></i> Contratar</a>
+                    </div>
+
+                    <!-- Plano 4: Personalizado -->
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <h4>Personalizado</h4>
+                            <div class="plan-price">R$ 405,25 <small>/mensais</small></div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li><i class="fa-regular fa-circle-check"></i> Adicionar Seu Domínio</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Servidor de E-mail (20 contas)</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Slide com Destaques</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Seção "Sobre a Empresa"</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Horário de Funcionamento</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Galeria de Fotos</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Cases de Clientes</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Cupons de Desconto</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Catálogo de Produtos</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Seção de Vídeos</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Painel de Notícias</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Blocos de Serviços</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Abas de Serviços</li>
+                                <li><i class="fa-regular fa-circle-check"></i> FAQ (Perguntas Frequentes)</li>
+                            </ul>
+                        </div>
+                        <a href="#contato" class="btn-outline"><i class="fa-regular fa-circle-check"></i> Contratar</a>
+                    </div>
+
+                    <!-- Plano 5: Google Ads -->
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <h4>Google Ads</h4>
+                            <div class="plan-price">R$ 810,50 <small>/mensais</small></div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li><i class="fa-regular fa-circle-check"></i> Adicionar Seu Domínio</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Servidor de E-mail (30 contas)</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Slide com Destaques</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Seção "Sobre a Empresa"</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Horário de Funcionamento</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Galeria de Fotos</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Cases de Clientes</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Cupons de Desconto</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Catálogo de Produtos</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Seção de Vídeos</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Painel de Notícias</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Blocos de Serviços</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Abas de Serviços</li>
+                                <li><i class="fa-regular fa-circle-check"></i> FAQ (Perguntas Frequentes)</li>
+                                <li><i class="fa-regular fa-circle-check"></i> <strong>Criação e Gestão de Anúncios Google</strong></li>
+                            </ul>
+                        </div>
+                        <a href="#contato" class="btn-outline"><i class="fa-regular fa-circle-check"></i> Contratar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tracker de Visitas e Mapa -->
+            <div class="visit-tracker">
+                <div class="tracker-info">
+                    <div class="tracker-icon">
+                        <i class="fa-solid fa-chart-simple"></i>
+                    </div>
+                    <div class="tracker-text">
+                        <h4><i class="fa-regular fa-eye"></i> Acompanhe suas visitas em tempo real</h4>
+                        <p>Visualize o mapa de localização e saiba de onde vêm seus clientes.</p>
+                    </div>
+                </div>
+                <div class="tracker-badge">
+                    <i class="fa-regular fa-map"></i> Mapa de Calor & Estatísticas
+                </div>
+            </div>
+        </div>
+        <!-- ===== FIM DA NOVA SEÇÃO ===== -->
 
         <section class="container" id="portfolio">
             <h2 class="section-title">Projetos <span>desenvolvidos</span></h2>
