@@ -1606,11 +1606,11 @@
         // ===== CONFIGURAÇÃO SUPABASE (MANTIDA) =====
         const SUPABASE_URL = 'https://gspobmfgjwnxzxxcrwdi.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdzcG9ibWZnandueHp4eGNyd2RpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMTU1OTEsImV4cCI6MjA4Nzc5MTU5MX0.OiUgS1N20VJ8XEGPngoe8lC7BuOMD5g_cdG7WtWFQ-I'; // ← COLE A CHAVE NOVA AQUI
-        
+           
         // Configurações adicionais
         const WHATSAPP_NUMBER = '5582999981912';
         const FORM_SUBMIT_URL = 'https://formsubmit.co/ajax/webtectec@zohomail.com';
-        
+    
         let supabaseClient;
         try {
             supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -1618,12 +1618,56 @@
         } catch (error) {
             console.error('❌ Erro Supabase:', error);
         }
-        
+    
+        // ===== FORMATAÇÃO AUTOMÁTICA DO TELEFONE =====
+        const telefoneInput = document.getElementById('telefone');
+    
+        if (telefoneInput) {
+            telefoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é número
+                
+                if (value.length > 0) {
+                    if (value.length <= 10) {
+                        // Formato (XX) XXXX-XXXX para números fixos
+                        value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+                    } else {
+                        // Formato (XX) XXXXX-XXXX para celulares (11 dígitos)
+                        value = value.replace(/^(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+                    }
+                }
+                
+                e.target.value = value.trim();
+            });
+    
+            // Remove formatação ao perder o foco se estiver vazio
+            telefoneInput.addEventListener('blur', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length === 0) {
+                    e.target.value = '';
+                }
+            });
+    
+            // Adiciona suporte para colar números
+            telefoneInput.addEventListener('paste', function(e) {
+                setTimeout(() => {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length > 0) {
+                        if (value.length <= 10) {
+                            value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+                        } else {
+                            value = value.replace(/^(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+                        }
+                        e.target.value = value.trim();
+                    }
+                }, 10);
+            });
+        }
+    
         const form = document.getElementById('contactForm');
         const successMsg = document.getElementById('successMessage');
         const errorMsg = document.getElementById('errorMessage');
         const submitBtn = document.getElementById('submitBtn');
-        
+    
         if (form) {
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -1633,7 +1677,7 @@
                 
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fa-regular fa-spinner fa-spin"></i> Enviando...';
-        
+    
                 try {
                     const formData = {
                         nome: document.getElementById('nome').value,
@@ -1643,10 +1687,10 @@
                         descricao: document.getElementById('mensagem').value,
                         created_at: new Date().toISOString()
                     };
-        
+    
                     const errors = [];
-        
-                    // 1️⃣ ENVIO PARA SUPABASE (USA A CHAVE NOVA)
+    
+                    // 1️⃣ ENVIO PARA SUPABASE
                     try {
                         const { error: supabaseError } = await supabaseClient
                             .from('orcamentos')
@@ -1662,8 +1706,8 @@
                         console.error('Erro Supabase:', error);
                         errors.push('Supabase: ' + error.message);
                     }
-        
-                    // 2️⃣ WHATSAPP (sempre tenta)
+    
+                    // 2️⃣ WHATSAPP - Preparar mensagem
                     const whatsappMessage = `*Novo Orçamento WEB TEC-TEC*%0A%0A` +
                         `*Nome:* ${formData.nome}%0A` +
                         `*E-mail:* ${formData.email}%0A` +
@@ -1688,7 +1732,7 @@
                                 telefone: formData.telefone,
                                 servico: formData.tipo_servico,
                                 mensagem: formData.descricao,
-                                _subject: 'Novo orçamento do site WEB TEC-TEC',
+                                _subject: '🔔 Novo orçamento do site WEB TEC-TEC',
                                 _template: 'table',
                                 _autoresponse: 'Obrigado pelo contato! Responderemos em até 24h.'
                             })
@@ -1702,10 +1746,10 @@
                     } catch (error) {
                         errors.push('Erro no e-mail: ' + error.message);
                     }
-        
+    
                     // 4️⃣ SEMPRE ABRE WHATSAPP
                     window.open(whatsappUrl, '_blank');
-        
+    
                     // 5️⃣ RESULTADO
                     if (errors.length === 0) {
                         successMsg.innerHTML = `
@@ -1727,7 +1771,7 @@
                     }
                     
                     successMsg.scrollIntoView({ behavior: 'smooth' });
-        
+    
                 } catch (error) {
                     console.error('Erro crítico:', error);
                     errorMsg.innerHTML = `
@@ -1746,11 +1790,11 @@
                 }
             });
         }
-        
-        // ===== MOBILE MENU (código existente - manter igual) =====
+    
+        // ===== MOBILE MENU (código existente) =====
         const mobileBtn = document.getElementById('mobileBtn');
         const navMenu = document.getElementById('navMenu');
-        
+    
         if (mobileBtn) {
             mobileBtn.addEventListener('click', () => {
                 navMenu.classList.toggle('active');
@@ -1759,7 +1803,7 @@
                     : '<i class="fa-solid fa-bars"></i>';
             });
         }
-        
+    
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
