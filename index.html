@@ -1602,9 +1602,15 @@
     </footer>
 
     <script>
-        // ===== CONFIGURAÇÃO SUPABASE COM FALLBACK =====
+        // ===== CONFIGURAÇÃO SUPABASE =====
         const SUPABASE_URL = 'https://gspobmfgjwnxzxxcrwdi.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdzcG9ibWZnandueHp4eGNyd2RpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMTU1OTEsImV4cCI6MjA4Nzc5MTU5MX0.OiUgS1N20VJ8XEGPngoe8lC7BuOMD5g_cdG7WtWFQ-I';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdzcG9ibWZnamdueHp4eGNyd2RpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMTU1OTEsImV4cCI6MjA4Nzc5MTU5MX0.OiUgS1N20VJ8XEGPngoe8lC7BuOMD5g_cdG7WtWFQ-I';
+        
+        // Configuração do WhatsApp
+        const WHATSAPP_NUMBER = '5582999981912'; // Código do país + número (sem + ou espaços)
+        
+        // Configuração do E-mail (usando FormSubmit.co - serviço gratuito)
+        const FORM_SUBMIT_URL = 'https://formsubmit.co/ajax/webtectec@zohomail.com';
         
         let supabaseClient;
         try {
@@ -1630,42 +1636,106 @@
                 submitBtn.innerHTML = '<i class="fa-regular fa-spinner fa-spin"></i> Enviando...';
         
                 try {
-                    // Verificação de conectividade
-                    const isOnline = await fetch('https://www.google.com', { mode: 'no-cors' }).catch(() => false);
-                    if (!isOnline) {
-                        throw new Error('Sem conexão com a internet');
-                    }
-        
                     const formData = {
                         nome: document.getElementById('nome').value,
                         email: document.getElementById('email').value,
-                        telefone: document.getElementById('telefone').value || null,
+                        telefone: document.getElementById('telefone').value || '',
                         tipo_servico: document.getElementById('servico').value,
                         descricao: document.getElementById('mensagem').value,
                         created_at: new Date().toISOString()
                     };
         
-                    // Timeout para evitar espera infinita
-                    const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 segundos
+                    // Array para controlar erros parciais
+                    const errors = [];
         
-                    const { error } = await supabaseClient
-                        .from('orcamentos')
-                        .insert([formData], { signal: controller.signal });
+                    // 1️⃣ Enviar para o Supabase
+                    try {
+                        const { error: supabaseError } = await supabaseClient
+                            .from('orcamentos')
+                            .insert([formData]);
+                        
+                        if (supabaseError) errors.push('Supabase: ' + supabaseError.message);
+                    } catch (error) {
+                        errors.push('Supabase: ' + error.message);
+                    }
         
-                    clearTimeout(timeoutId);
+                    // 2️⃣ Enviar para o WhatsApp (usando API da Meta - precisa de configuração)
+                    // Por enquanto, apenas geramos o link (opção manual)
+                    const whatsappMessage = `*Novo Orçamento WEB TEC-TEC*%0A%0A` +
+                        `*Nome:* ${formData.nome}%0A` +
+                        `*E-mail:* ${formData.email}%0A` +
+                        `*Telefone:* ${formData.telefone || 'Não informado'}%0A` +
+                        `*Serviço:* ${formData.tipo_servico}%0A` +
+                        `*Mensagem:* ${formData.descricao}%0A` +
+                        `*Data:* ${new Date().toLocaleString('pt-BR')}`;
+                    
+                    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
+                    
+                    // 3️⃣ Enviar para o E-mail usando FormSubmit
+                    try {
+                        const emailResponse = await fetch(FORM_SUBMIT_URL, {
+                            method: 'POST',
+                            headers: { 
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                name: formData.nome,
+                                email: formData.email,
+                                telefone: formData.telefone,
+                                servico: formData.tipo_servico,
+                                mensagem: formData.descricao,
+                                _subject: 'Novo orçamento do site WEB TEC-TEC',
+                                _template: 'table'
+                            })
+                        });
+                        
+                        if (!emailResponse.ok) errors.push('Falha no envio do e-mail');
+                    } catch (error) {
+                        errors.push('Erro no e-mail: ' + error.message);
+                    }
         
-                    if (error) throw error;
-        
-                    successMsg.style.display = 'block';
-                    form.reset();
-                    successMsg.scrollIntoView({ behavior: 'smooth' });
+                    // Se tudo deu certo ou houve erros parciais
+                    if (errors.length === 0) {
+                        // Sucesso total - abre WhatsApp e mostra mensagem
+                        successMsg.innerHTML = `
+                            <i class="fa-regular fa-circle-check"></i> 
+                            Orçamento enviado! Redirecionando para WhatsApp...
+                        `;
+                        successMsg.style.display = 'block';
+                        
+                        // Abre WhatsApp em nova aba
+                        window.open(whatsappUrl, '_blank');
+                        
+                        form.reset();
+                        successMsg.scrollIntoView({ behavior: 'smooth' });
+                        
+                        // Muda mensagem após 3 segundos
+                        setTimeout(() => {
+                            successMsg.innerHTML = '<i class="fa-regular fa-circle-check"></i> Mensagem enviada com sucesso! Entraremos em contato em até 24h.';
+                        }, 3000);
+                        
+                    } else {
+                        // Erro parcial - mas ainda assim tenta abrir WhatsApp
+                        errorMsg.innerHTML = `
+                            <i class="fa-regular fa-circle-exclamation"></i> 
+                            Houve um problema no envio, mas você pode nos chamar diretamente:
+                            <a href="${whatsappUrl}" target="_blank" style="color: white; font-weight: bold; text-decoration: underline; display: block; margin-top: 10px;">
+                                <i class="fab fa-whatsapp"></i> Clique aqui para falar no WhatsApp
+                            </a>
+                        `;
+                        errorMsg.style.display = 'block';
+                    }
         
                 } catch (error) {
-                    console.error('Erro detalhado:', error);
-                    
-                    // Mensagem mais amigável
-                    errorMsg.innerHTML = '<i class="fa-regular fa-circle-exclamation"></i> Não foi possível conectar ao servidor. Por favor, nos chame no WhatsApp (82) 9.9998-1912 ou tente novamente mais tarde.';
+                    console.error('Erro crítico:', error);
+                    errorMsg.innerHTML = `
+                        <i class="fa-regular fa-circle-exclamation"></i> 
+                        Erro ao enviar. Fale conosco no 
+                        <a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" style="color: white; font-weight: bold; text-decoration: underline;">
+                            WhatsApp
+                        </a>: (82) 9.9998-1912
+                    `;
                     errorMsg.style.display = 'block';
                 } finally {
                     submitBtn.disabled = false;
@@ -1673,10 +1743,11 @@
                 }
             });
         }
-
+        
+        // ===== MOBILE MENU (código existente) =====
         const mobileBtn = document.getElementById('mobileBtn');
         const navMenu = document.getElementById('navMenu');
-
+        
         if (mobileBtn) {
             mobileBtn.addEventListener('click', () => {
                 navMenu.classList.toggle('active');
@@ -1685,7 +1756,7 @@
                     : '<i class="fa-solid fa-bars"></i>';
             });
         }
-
+        
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
