@@ -2378,14 +2378,18 @@
             });
         });
     
-        // ===== AGENTE SEMIAUTÔNOMO =====
+        // ===== AGENTE SEMIAUTÔNOMO - VERSÃO CORRIGIDA =====
         const btnAgente = document.getElementById('btnAcionarAgente');
         const resultadoDiv = document.getElementById('resultadoAgente');
-    
+
         if (btnAgente && resultadoDiv) {
             btnAgente.addEventListener('click', async () => {
                 resultadoDiv.innerHTML = '<i class="fa-regular fa-spinner fa-spin"></i> Agente analisando leads...';
                 resultadoDiv.style.color = 'var(--primary)';
+                
+                // USAR AS MESMAS CONSTANTES GLOBAIS
+                const SUPABASE_URL = 'https://gspobmfgjwnxzxxcrwdi.supabase.co';
+                const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdzcG9ibWZnandueHp4eGNyd2RpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMTU1OTEsImV4cCI6MjA4Nzc5MTU5MX0.OiUgS1N20VJ8XEGPngoe8lC7BuOMD5g_cdG7WtWFQ-I';
                 
                 try {
                     const response = await fetch(`${SUPABASE_URL}/functions/v1/prospect`, {
@@ -2402,7 +2406,6 @@
                         resultadoDiv.innerHTML = `<i class="fa-regular fa-circle-check" style="color: var(--secondary);"></i> ${data.message}`;
                         resultadoDiv.style.color = 'var(--gray)';
                         
-                        // Se houver leads, mostra quantos
                         if (data.leads && data.leads.length > 0) {
                             const listaLeads = data.leads.map(lead => 
                                 `📌 ${lead.nome_empresa || 'Empresa'} - ${lead.sugestao_instagram || 'sem instagram'}`
@@ -2415,7 +2418,7 @@
                     }
                 } catch (error) {
                     console.error('Erro ao acionar agente:', error);
-                    resultadoDiv.innerHTML = `<i class="fa-regular fa-circle-exclamation" style="color: #ef4444;"></i> Erro de conexão. Tente novamente.`;
+                    resultadoDiv.innerHTML = `<i class="fa-regular fa-circle-exclamation" style="color: #ef4444;"></i> Erro de conexão: ${error.message}`;
                     resultadoDiv.style.color = '#ef4444';
                 }
             });
