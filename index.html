@@ -55,7 +55,7 @@
             --secondary: #00c9b7;
             --secondary-dark: #006b60;
             --accent: #ff8a5c;
-            --dark: #0a0f1e; /* Mais escuro para contraste */
+            --dark: #0a0f1e;
             --gray: #1e293b;
             --light: #f1f5f9;
             --white: #ffffff;
@@ -184,7 +184,7 @@
         .logo-text h1 {
             font-size: 1.8rem;
             line-height: 1.2;
-            color: #0a0f1e; /* Tom mais escuro para contraste */
+            color: #0a0f1e;
         }
 
         .logo-text .tech {
@@ -226,7 +226,7 @@
         .qrcode-header span {
             font-size: 0.9rem;
             font-weight: 600;
-            color: #0a0f1e; /* Cor mais escura */
+            color: #0a0f1e;
         }
 
         .qrcode-header small {
@@ -2232,6 +2232,31 @@
                         descricao: document.getElementById('mensagem').value,
                         created_at: new Date().toISOString()
                     };
+    
+                    // NOVO: Salvar lead na tabela leads_prospeccao
+                    try {
+                        const leadData = {
+                            nome_empresa: formData.nome,
+                            telefone: formData.telefone,
+                            email: formData.email,
+                            origem: 'form_contato',
+                            status: 'novo',
+                            observacoes: `Serviço: ${formData.tipo_servico} - ${formData.descricao.substring(0, 200)}`
+                        };
+                        
+                        if (supabaseClient) {
+                            const { error: leadError } = await supabaseClient
+                                .from('leads_prospeccao')
+                                .insert([leadData]);
+                                
+                            if (leadError) console.warn('Lead não salvo:', leadError);
+                            else console.log('✅ Lead registrado internamente');
+                        } else {
+                            console.warn('Supabase não inicializado, lead não salvo');
+                        }
+                    } catch(e) { 
+                        console.warn('Erro ao salvar lead:', e); 
+                    }
     
                     const errors = [];
     
