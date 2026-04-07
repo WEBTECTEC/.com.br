@@ -1,3 +1,4 @@
+// supabase/functions/prospect/index.ts
 // Função que busca leads novos e tenta enriquecer com dados públicos
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
@@ -15,7 +16,9 @@ serve(async (req) => {
     .eq('status', 'novo')
     .limit(5)
 
-  if (error) return new Response(JSON.stringify({ error }), { status: 500 })
+  if (error) {
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 })
+  }
 
   // Para cada lead, simular enriquecimento (futuro: API de CNPJ, Instagram, etc)
   const resultados = []
@@ -23,7 +26,7 @@ serve(async (req) => {
     // Ação semiautônoma: apenas prepara dados, não envia ainda
     const enriquecido = {
       ...lead,
-      sugestao_instagram: `@${lead.nome_empresa.replace(/\s/g, '').toLowerCase()}`,
+      sugestao_instagram: `@${lead.nome_empresa?.replace(/\s/g, '').toLowerCase() || 'empresa'}`,
       status: 'analise_manual'
     }
     
@@ -36,7 +39,10 @@ serve(async (req) => {
   }
 
   return new Response(JSON.stringify({ 
-    message: `✅ ${resultados.length} leads preparados para revisão manual`,
+    message: `✅ ${resultados.length} lead(s) preparado(s) para revisão manual`,
     leads: resultados 
-  }), { status: 200 })
+  }), { 
+    status: 200,
+    headers: { 'Content-Type': 'application/json' }
+  })
 })
