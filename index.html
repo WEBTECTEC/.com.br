@@ -2101,6 +2101,23 @@
                 </div>
             </div>
         </div>
+
+        <!-- SEÇÃO DO AGENTE SEMIAUTÔNOMO -->
+        <div class="container" style="margin: 2rem auto;">
+            <div style="background: linear-gradient(135deg, var(--light), #e8edf5); border-radius: var(--border-radius); padding: 2rem; text-align: center;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">
+                    <i class="fa-regular fa-robot"></i> Agente de Prospecção Inteligente
+                </h3>
+                <p style="color: var(--gray); margin-bottom: 1.5rem;">
+                    Clique no botão abaixo para analisar leads pendentes e sugerir ações de contato.
+                    O agente é <strong>semiautônomo</strong>: você revisa antes de qualquer ação.
+                </p>
+                <button id="btnAcionarAgente" class="btn-primary" style="background: var(--primary);">
+                    <i class="fa-regular fa-chart-line"></i> Acionar Agente Agora
+                </button>
+                <div id="resultadoAgente" style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--gray);"></div>
+            </div>
+        </div>
     </main>
 
     <footer class="footer">
@@ -2352,6 +2369,49 @@
                 if (mobileBtn) mobileBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
             });
         });
+    
+        // ===== AGENTE SEMIAUTÔNOMO =====
+        const btnAgente = document.getElementById('btnAcionarAgente');
+        const resultadoDiv = document.getElementById('resultadoAgente');
+    
+        if (btnAgente && resultadoDiv) {
+            btnAgente.addEventListener('click', async () => {
+                resultadoDiv.innerHTML = '<i class="fa-regular fa-spinner fa-spin"></i> Agente analisando leads...';
+                resultadoDiv.style.color = 'var(--primary)';
+                
+                try {
+                    const response = await fetch(`${SUPABASE_URL}/functions/v1/prospect`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        resultadoDiv.innerHTML = `<i class="fa-regular fa-circle-check" style="color: var(--secondary);"></i> ${data.message}`;
+                        resultadoDiv.style.color = 'var(--gray)';
+                        
+                        // Se houver leads, mostra quantos
+                        if (data.leads && data.leads.length > 0) {
+                            const listaLeads = data.leads.map(lead => 
+                                `📌 ${lead.nome_empresa || 'Empresa'} - ${lead.sugestao_instagram || 'sem instagram'}`
+                            ).join('<br>');
+                            resultadoDiv.innerHTML += `<br><br><strong>Leads analisados:</strong><br>${listaLeads}`;
+                        }
+                    } else {
+                        resultadoDiv.innerHTML = `<i class="fa-regular fa-circle-exclamation" style="color: #ef4444;"></i> ${data.error || 'Erro desconhecido'}`;
+                        resultadoDiv.style.color = '#ef4444';
+                    }
+                } catch (error) {
+                    console.error('Erro ao acionar agente:', error);
+                    resultadoDiv.innerHTML = `<i class="fa-regular fa-circle-exclamation" style="color: #ef4444;"></i> Erro de conexão. Tente novamente.`;
+                    resultadoDiv.style.color = '#ef4444';
+                }
+            });
+        }
     </script>
 </body>
 </html>
