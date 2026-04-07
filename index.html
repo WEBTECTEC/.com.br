@@ -2164,24 +2164,35 @@
     </footer>
 
     <script>
-        // Configuração Supabase
+        // Configuração Supabase - INICIALIZAÇÃO ROBUSTA
         const SUPABASE_URL = 'https://gspobmfgjwnxzxxcrwdi.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdzcG9ibWZnandueHp4eGNyd2RpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMTU1OTEsImV4cCI6MjA4Nzc5MTU5MX0.OiUgS1N20VJ8XEGPngoe8lC7BuOMD5g_cdG7WtWFQ-I';
-           
-        const WHATSAPP_NUMBER = '5582999981912';
-        const FORM_SUBMIT_URL = 'https://formsubmit.co/ajax/webtectec@zohomail.com';
-    
+
         let supabaseClient;
-        
-        // Inicializa Supabase apenas após o carregamento da página
+
+        // Tenta criar o cliente imediatamente
+        try {
+            if (typeof supabase !== 'undefined') {
+                supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                console.log('✅ Supabase inicializado imediatamente');
+            } else {
+                console.warn('⏳ Aguardando Supabase carregar...');
+            }
+        } catch (e) {
+            console.warn('⏳ Erro ao inicializar Supabase, aguardando load...', e);
+        }
+
+        // Fallback: espera o load se necessário
         window.addEventListener('load', function() {
-            try {
-                if (typeof supabase !== 'undefined') {
+            if (!supabaseClient && typeof supabase !== 'undefined') {
+                try {
                     supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                    console.log('✅ Supabase conectado');
+                    console.log('✅ Supabase inicializado no evento load');
+                } catch (error) {
+                    console.error('❌ Erro ao inicializar Supabase no load:', error);
                 }
-            } catch (error) {
-                console.error('❌ Erro Supabase:', error);
+            } else if (supabaseClient) {
+                console.log('✅ Supabase já estava inicializado');
             }
         });
     
@@ -2250,29 +2261,32 @@
                         created_at: new Date().toISOString()
                     };
     
-                    // NOVO: Salvar lead na tabela leads_prospeccao
+                    // ===== SALVAR NA TABELA leads_prospeccao =====
                     try {
-                        const leadData = {
-                            nome_empresa: formData.nome,
-                            telefone: formData.telefone,
-                            email: formData.email,
-                            origem: 'form_contato',
-                            status: 'novo',
-                            observacoes: `Serviço: ${formData.tipo_servico} - ${formData.descricao.substring(0, 200)}`
-                        };
-                        
                         if (supabaseClient) {
+                            const leadData = {
+                                nome_empresa: formData.nome,
+                                telefone: formData.telefone,
+                                email: formData.email,
+                                origem: 'form_contato',
+                                status: 'novo',
+                                observacoes: `Serviço: ${formData.tipo_servico} - ${formData.descricao.substring(0, 200)}`
+                            };
+                            
                             const { error: leadError } = await supabaseClient
                                 .from('leads_prospeccao')
                                 .insert([leadData]);
                                 
-                            if (leadError) console.warn('Lead não salvo:', leadError);
-                            else console.log('✅ Lead registrado internamente');
+                            if (leadError) {
+                                console.warn('⚠️ Lead não salvo na tabela de prospecção:', leadError);
+                            } else {
+                                console.log('✅ Lead salvo na tabela leads_prospeccao');
+                            }
                         } else {
-                            console.warn('Supabase não inicializado, lead não salvo');
+                            console.warn('⚠️ Supabase não inicializado, lead não salvo');
                         }
-                    } catch(e) { 
-                        console.warn('Erro ao salvar lead:', e); 
+                    } catch(e) {
+                        console.warn('❌ Erro ao salvar lead:', e);
                     }
     
                     const errors = [];
