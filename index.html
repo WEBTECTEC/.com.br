@@ -2164,37 +2164,31 @@
     </footer>
 
     <script>
-        // Configuração Supabase - INICIALIZAÇÃO ROBUSTA
+        // ===== CONFIGURAÇÕES GLOBAIS =====
         const SUPABASE_URL = 'https://gspobmfgjwnxzxxcrwdi.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdzcG9ibWZnandueHp4eGNyd2RpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMTU1OTEsImV4cCI6MjA4Nzc5MTU5MX0.OiUgS1N20VJ8XEGPngoe8lC7BuOMD5g_cdG7WtWFQ-I';
+        const WHATSAPP_NUMBER = '5582999981912';
+        const FORM_SUBMIT_URL = 'https://formsubmit.co/ajax/webtectec@zohomail.com';
 
         let supabaseClient;
 
-        // Tenta criar o cliente imediatamente
+        // Inicializa Supabase imediatamente
         try {
             if (typeof supabase !== 'undefined') {
                 supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                console.log('✅ Supabase inicializado imediatamente');
+                console.log('✅ Supabase inicializado');
             } else {
                 console.warn('⏳ Aguardando Supabase carregar...');
+                window.addEventListener('load', () => {
+                    if (typeof supabase !== 'undefined') {
+                        supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                        console.log('✅ Supabase inicializado no load');
+                    }
+                });
             }
         } catch (e) {
-            console.warn('⏳ Erro ao inicializar Supabase, aguardando load...', e);
+            console.warn('Erro ao inicializar Supabase:', e);
         }
-
-        // Fallback: espera o load se necessário
-        window.addEventListener('load', function() {
-            if (!supabaseClient && typeof supabase !== 'undefined') {
-                try {
-                    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                    console.log('✅ Supabase inicializado no evento load');
-                } catch (error) {
-                    console.error('❌ Erro ao inicializar Supabase no load:', error);
-                }
-            } else if (supabaseClient) {
-                console.log('✅ Supabase já estava inicializado');
-            }
-        });
     
         // Formatação do telefone
         const telefoneInput = document.getElementById('telefone');
